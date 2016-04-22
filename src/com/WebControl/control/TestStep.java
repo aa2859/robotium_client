@@ -12,7 +12,9 @@ import java.util.Date;
 
 
 
+
 import javax.xml.xpath.XPathExpressionException;
+
 
 
 
@@ -25,21 +27,7 @@ import org.w3c.dom.Element;
 
 import org.w3c.dom.NodeList;
 
-
-
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.util.Log;
-import android.view.View;
 
 import com.robotium.solo.Solo;
 import com.robotium.solo.WebElement;
@@ -376,6 +364,5 @@ public class TestStep {
 			TestHelper.solo.clickOnWebElement(we);
 		}
 	}
-	
 	
 }

@@ -7,29 +7,23 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Element;
 
-
-
 import android.util.Log;
 
 import com.robotium.solo.Solo;
 
 public class R_KeyEvent extends TestStep{
 
-	private String  key;
+	private int  key;
 
-	public String getKey() {
-		return this.key;
+	public int getKey() {
+		return key;
 	}
 
 	public void setKey(String key) {
 		if (key != null && key.trim().isEmpty())
-			this.key = "-1";
-		else{
-			
-			this.key = key;
-			
-		}
-			
+			this.key = -1;
+		else
+			this.key = Integer.parseInt(key);
 	}
 	
 	public R_KeyEvent(Element step) throws XPathExpressionException{
@@ -41,31 +35,11 @@ public class R_KeyEvent extends TestStep{
 	}
 	
 	@Override
-	public void Excut(Solo solo){
-		
-		
-		if(this.getKey()!= "-1"){
+	public void Excut(Solo solo) {
+		if(this.getKey()!= -1){
 			this.screenShot(solo);
-			
-		
-			if(this.getKey().length()>2){
-				
-				CommandUtil commandUtil = new CommandUtil();
-				try {
-					
-				
-					commandUtil.executeCommand("input text "+this.getKey());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				//TestHelper.execCommand("input text "+this.getKey());
-			}else{
-				solo.sendKey(Integer.parseInt(this.key));
-			}
-			
-			
-			
+			Log.i("123", "ccss"+this.getKey());
+			solo.sendKey(this.getKey());
 		}else {
 			throw new IllegalArgumentException("NoParameter"); 
 		}

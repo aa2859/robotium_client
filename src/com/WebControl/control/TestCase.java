@@ -3,6 +3,7 @@ package com.WebControl.control;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +26,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import android.net.TrafficStats;
 import android.util.Log;
+import android.view.View;
+
 import com.robotium.solo.Solo;
 
 
@@ -116,7 +118,7 @@ public class TestCase {
 	
 	public void run(Solo solo)
 	{
-		
+		int y=0;
 		for (int i=0;i<this.getStepList().size();i++) {
 			TestStep step = getStepList().get(i);
 			step.screenName = i+"";
@@ -134,10 +136,20 @@ public class TestCase {
 				}else if(e.getMessage().equals("NoParameter")){
 					step.setResultStatic("2");
 					step.setResultMsg("无参数  执行不成功");
-				}else{
+				}else if(e.getMessage().equals("overtime")){
+					if(y<3){
+						i=i-2;
+						y++;
+						continue;
+					}
+					step.setResultStatic("2");
+					step.setResultMsg("多次请求超时,执行不成功");
+				}
+				else{
 					step.setResultStatic("3");
 					step.setResultMsg(e.getMessage());
 				}
+				
 				try
 				{
 					solo.takeScreenshot("fail");
@@ -157,15 +169,12 @@ public class TestCase {
 			{
 				Log.i("123","执行失败");
 				break;
-			}	
-		} 
-		TestHelper.endFlow();
-		
-		caseElement.setAttribute("flow", "接收流量:"+
-		(TestHelper.endUpFlow-TestHelper.startUpFlow)/1024+"KB"+
-				",发送流量:"+(TestHelper.endDownFlow-TestHelper.startDownFlow)/1024+"KB");	
-		creatXML();
-		
+			}
+			
+				
+			
+			
+		}
 	}
 	
 	public void creatXML()

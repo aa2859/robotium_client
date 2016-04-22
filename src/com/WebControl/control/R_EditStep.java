@@ -63,29 +63,12 @@ public class R_EditStep extends TestStep {
 		
 		this.screenShot(solo);
 		
-		 if ((this.getAdvanced()+"").equals("neglect")) {
-				String xPath = this.XPath();
-				if (this.getUserXPath() != null){
-					xPath = this.getUserXPath();
-				}
-			
-				if(TestHelper.solo.waitForWebElement(By.xpath(xPath), 5000, false)){
-					WebElement we = TestHelper.findWebElement(this);
-				
-					solo.enterTextInWebElement(By.xpath(this.XPath()), this.getInputText());
-					return;
-				}else{
-					return;
-				}	
-			}
-		
-		
 		WebElement we = TestHelper.findWebElement(this);
 		if(we==null)
 			throw new IllegalArgumentException("NoControlIsFound"); 
 		solo.enterTextInWebElement(By.xpath(this.XPath()), this.getInputText());
 		
-		
+	
 		
 	}
 	

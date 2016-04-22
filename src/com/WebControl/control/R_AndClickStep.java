@@ -3,8 +3,6 @@
 
 
 
-import java.util.ArrayList;
-
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -13,10 +11,8 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Element;
 
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.SystemClock;
 import android.view.View;
+
 import com.robotium.solo.Solo;
 
 
@@ -42,33 +38,68 @@ public class R_AndClickStep extends TestStep {
 				XPathConstants.STRING));
 	}
 	
+	/*public ArrayList<View> screenView(Solo solo,String tagName){
+		ArrayList<View> viewList = new ArrayList<View>();
+		viewList = solo.getViews();
+		
+		ArrayList<View> tagList = new ArrayList<View>();
+		ArrayList<View> idList = new ArrayList<View>();
+		ArrayList<View> textList = new ArrayList<View>();
+		
+		
+		String textCont = "";
+		String tvText = "";
+		
+		if(this.getTextContent() != null){
+			textCont = this.getTextContent();
+			Log.i("123", "aaa"+textCont);
+			View view = solo.onTextView(textCont, this.getIndex());
+			Log.i("123", "aaatextlist:"+textList);
+			tvText = ((TextView) view).getText()+"";
+			Log.i("123", "aaa"+tvText);
+			if(tvText.equals(textCont)){
+			textList.add(view);
+			
+			}
+		}else{
+			textList = viewList;
+		}
+		
+		
+		if(this.getId() != null){
+			for(View view : viewList){
+				if(TestHelper.getId(this.getId()) == view.getId()){	
+					
+					
+					idList.add(view);
+					Log.i("123", "idview:"+view);
+					
+				}
+			}
+		}else{
+			idList = textList;
+		}
+		
+		
+		if(tagName != null){
+			tagName = this.getTagName().toLowerCase();
+			for(View view : idList){
+			if(("class android.widget."+tagName).equals(view.getClass().toString().toLowerCase())){
+				tagList.add(view);
+				}
+			}
+		}else{
+			tagList = idList;
+		}
+		
+		return tagList;
+	}*/
+	
 	
 	@Override
 	public void Excut(Solo solo) {
 		/*List<View> listAll = new ArrayList<View>();
 		listAll = solo.getViews();*/
-		
-		if((this.getAdvanced()+"").contains("neglect") && this.getAdvanced() != null){
-			ArrayList<View> viewList = new ArrayList<View>();
-			
-			long endTime = SystemClock.uptimeMillis() + 5000;
-			do {
-				
-				viewList = TestHelper.screenView(this);;
-				if (viewList.size() != 0)
-					break;
-			} while (SystemClock.uptimeMillis() < endTime);
-			
-			if(viewList != null){
-				View view = viewList.get(this.getIndex());
-				this.screenShot(solo);	
-				solo.clickOnView(view);
-				return;
-			}
-			return;
-		}
-		
-		
 		
 		View view = TestHelper.screen(this);
 		
@@ -76,19 +107,109 @@ public class R_AndClickStep extends TestStep {
 			throw new IllegalArgumentException("NoControlIsFound");   
 		
 		this.screenShot(solo);	
-		
-		if(this.getAdvanced() !=null && this.getAdvanced().contains("longClick"))//后期再区分高级配置
-			solo.clickLongOnView(view);
-		else{
-			solo.clickOnView(view);
-		}
+		solo.clickOnView(view);
 		
 		if(getCheckText()!=null)
 		{
 			if(!solo.waitForText(getCheckText(), 1, 5000, false))
 				throw new IllegalArgumentException("NoControlIsFound");  
 		}
+		/*if(this.getId() != null){
+			for(View view : viewList){
+				if(TestHelper.getId(this.getId()) == view.getId()){
+				idList.add(view);
+				Log.i("123", ""+view.getId());
+				}
+			}
+		}else{
+			idList = viewList;
+		}
+	
+	
+			
+		if(idList.size()>0){
+			Log.i("123", ""+idList.size());
+			if(this.getTextContent() != null) {
+				this.screenShot(solo);
+				Log.i("123", this.getTextContent());
+				solo.clickOnText(this.getTextContent(), this.getIndex());
+				
+			}else{
+				if(this.getTagName() != null){
+					for(View view : idList){
+						String tagName = this.getTagName().toLowerCase();
+						
+						if(("class android.widget."+tagName).equals(view.getClass().toString().toLowerCase())){
+							Log.i("123", "输入:"+"class android.widget."+tagName);
+							Log.i("123", view.getClass().toString().toLowerCase());
+							switch (tagName) {
+							case "imagebutton":
+								solo.clickOnImageButton(this.getIndex() - 1);
+								break;
+							case "listview":
+								solo.scrollListToTop(0);
+								solo.clickOnText(this.getTextContent());
+								break;
+							case "imageview":
+								solo.clickOnImage(this.getIndex() - 1);
+								break;
+							case "checkbox":
+								solo.clickOnCheckBox(this.getIndex() - 1);
+								break;
+							default:
+								break;
+							}
+						}
+					}
+				}else{
+			for(View view : idList){
+				this.screenShot(solo);
+				solo.clickOnView(view);
+				Log.i("123", "idlist");
+			}
+				}
+		}
+		}else
+			throw new IllegalArgumentException("NoControlIsFound");*/
 		
+		
+		
+		
+		
+
+		/*
+			if (this.getId() != null) {
+				View view = solo.getView(this.getId(),this.getIndex()-1);
+				this.screenShot(solo);
+				solo.clickOnView(view);
+			}
+			else if (this.getTextContent() != null) {
+				solo.clickOnText(this.getTextContent(), this.getIndex());
+				this.screenShot(solo);
+			}else if (this.getTagName() != null) {
+				String tagName = this.getTagName().toLowerCase();// 全部转成小写
+				this.screenShot(solo);
+				switch (tagName) {
+				case "imagebutton":
+					solo.clickOnImageButton(this.getIndex() - 1);
+					break;
+				case "listview":
+					solo.scrollListToTop(0);
+					solo.clickOnText(this.getTextContent());
+					break;
+				case "imageview":
+					solo.clickOnImage(this.getIndex() - 1);
+					break;
+				case "checkbox":
+					solo.clickOnCheckBox(this.getIndex() - 1);
+					break;
+				default:
+					break;
+				}
+				
+			}//要改
+*/		
+	
 			
 	}
 

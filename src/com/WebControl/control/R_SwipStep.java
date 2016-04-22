@@ -1,5 +1,7 @@
 ﻿package com.WebControl.control;
 
+
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -7,11 +9,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Element;
 
-import android.app.Instrumentation;
-import android.os.SystemClock;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
-
+import android.util.Log;
 
 import com.robotium.solo.Solo;
 import com.robotium.solo.WebElement;
@@ -57,7 +56,7 @@ public class R_SwipStep extends TestStep {
 	public void Excut(Solo solo) {
 		DisplayMetrics dm = new DisplayMetrics();
 		solo.getCurrentActivity().getWindowManager().getDefaultDisplay().getMetrics(dm) ;
-		//this.screenShot(solo); //滑动不拍照了
+		//this.screenShot(solo);
 		int wide=dm.widthPixels;
 		int height=dm.heightPixels;
 		
@@ -143,10 +142,9 @@ public class R_SwipStep extends TestStep {
 				break;
 			}
 		}
-			//Log.i("123", "我要滑了:"+fromX+"_____"+fromY);
+			Log.i("123", "我要滑了:"+fromX+"_____"+fromY);
 			solo.drag(fromX, toX, fromY, toY, count);
-		
-			//Log.i("123", "我滑好了:"+toX+"_____"+toY);
+			Log.i("123", "我滑好了:"+toX+"_____"+toY);
 	}
 
 	
@@ -158,5 +156,6 @@ public class R_SwipStep extends TestStep {
 			return Float.parseFloat(point.trim());
 		}
 	}
-
+	
+	
 }
