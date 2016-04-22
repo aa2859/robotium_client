@@ -11,7 +11,6 @@ import org.w3c.dom.Element;
 
 import android.util.Log;
 
-import com.WebControl.cpic.cmp.CommandUtil;
 import com.robotium.solo.Solo;
 
 public class R_KeyEvent extends TestStep{
