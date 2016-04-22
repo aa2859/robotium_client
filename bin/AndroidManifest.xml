@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.WebControl.control"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+     
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.ihandy.xgx.browsersit" />
+    
+    <!-- M2-4  com.cpic.cmp2 -->
+     <!-- 中太企业版     com.cpic.appstore -->
+      <!-- 车E保手机    com.cpic.ecarsit -->
+   
+    <!-- 稳健人生   com.crm_i13sit -->
+    <!-- 即时通   com.cpic.jst -->
+    
+   
+      <!-- E保通  com.wondertek.cpicmobile -->
+  <!-- 中太  com.cpic.cmp -->
+   <!-- 车E保  com.wondertek.mist.cxxssit -->
+<!--  第三方付  com.cpic.pay -->
+<!--  记事本  com.cpic.mobilenote -->
+<!-- 手机MAM  com.ihandy.xgx.browser -->
+    <application >
+         <uses-library android:name="android.test.runner" />
+         <receiver android:name="com.WebControl.receiver" >
+               <intent-filter >
+                   <action android:name="com.WebControl.receiver"/>
+               </intent-filter>
+         </receiver>
+    </application>
+
+</manifest>
